@@ -3,9 +3,10 @@ import utils
 
 kocka = shape.Shape()
 kocka.a, kocka.b, kocka.c, kocka.x = utils.getInfoFromFile()
-print(kocka.a)
+utils.strToIntAllPoints(kocka)
 
-if (kocka.checkIfRectangle()):
+if(kocka.checkIfRectangle()):
+    print("Shape is rectangle.")
     if(kocka.checkIfPointXInside()):
         print("X is inside rectangle.")
     else:
