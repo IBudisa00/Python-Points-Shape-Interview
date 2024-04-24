@@ -1,24 +1,19 @@
 import shape
 import utils
 
-object = shape.Shape()
-object.a, object.b, object.c, object.x = utils.getInfoFromFile()
-utils.strToIntAllPoints(object)
-
-typeOfShape = object.checkShapeType()
-if(typeOfShape == "square"):
-    print("Shape is square.")
-    if(object.checkIfPointXInside()):
-        print("X is inside square.")
-    else:
-        print("X isn't part of square.")
-    print(f'Diagonal: {object.calculateDiagonal()}')
-elif(typeOfShape == "rectangle"):
-    print("Shape is rectangle.")
-    if(object.checkIfPointXInside()):
-        print("X is inside rectangle.")
-    else:
-        print("X isn't part of rectangle.")
-    print(f'Diagonal: {object.calculateDiagonal()}')
+#regarding number of lines correct shape class will be used (2D or 3D) --> (4 lines or 5 lines) 
+numberOfLinesInFile = utils.getNumberOfLinesFromFile()
+if(numberOfLinesInFile == 4):
+    object = shape.Shape2D()
+elif(numberOfLinesInFile == 5):
+    object = shape.Shape3D()
 else:
-    print("Shape cannot be rectangle, exiting program...")
+    print("ERROR - Incorrect number of lines (arguments) in file.")
+
+if(isinstance(object,shape.Shape2D)):
+    utils.strToIntAllPoints2D(object)
+    typeOfShape = object.checkShapeType()
+
+elif(isinstance(object,shape.Shape3D)):
+    utils.strToIntAllPoints3D(object)
+    object.checkShapeType()
