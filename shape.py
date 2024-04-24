@@ -20,7 +20,7 @@ class Shape:
         self.bSide = calculateHypotenusis(self.a[0], self.a[1], self.c[0], self.c[1])
         self.cSide = calculateHypotenusis(self.a[0], self.a[1], self.b[0], self.b[1])
 
-    def checkAngles(self):
+    def calculateAngles(self):
         self.calculateSides()
         alfa = round(degrees(acos((self.bSide**2 + self.cSide**2 - self.aSide**2)/ (2 * self.bSide * self.cSide))), 3)
         if(alfa == 90.0):
@@ -34,17 +34,24 @@ class Shape:
             else:
                 if(180 - alfa - beta == 90.0):
                     self.rightAngle = "c"
-                    return True
-                else:
-                    return False
 
-    def checkIfRectangle(self):
-        if(self.checkAngles()):
-            return True
+    def checkShapeType(self):
+        self.calculateAngles()
+        if(self.rightAngle != "none" and self.checkIfSidesAreEqual() == "square"):
+            return "square"
+        elif(self.rightAngle != "none" and self.checkIfSidesAreEqual() == "rectangle"):
+            return "rectangle"
         else:
-            return False
+            return "unknown"
+        
+    def checkIfSidesAreEqual(self):
+        if(self.aSide == self.bSide or self.aSide == self.cSide or self.bSide == self.cSide):
+            return "square"
+        else:
+            return "rectangle"
 
     def checkIfPointXInside(self):
+        self.calculateAngles()
         if(self.rightAngle == "a"):
             factor1 = (self.a[0] * (self.c[1] - self.a[1]) + (self.x[1] - self.a[1]) * (self.c[0] - self.a[0]) - (self.x[0] * (self.c[1] - self.a[1])))/((self.b[1] - self.a[1]) * (self.c[0] - self.a[0]) - ((self.b[0] - self.a[0]) * (self.c[1] - self.a[1])))
             factor2 = (self.x[1] - self.a[1] - (factor1 * (self.b[1] - self.a[1])))/(self.c[1] - self.a[1])
@@ -71,9 +78,6 @@ class Shape:
                 return False
 
     def calculateDiagonal(self):
-        # in task it wasn't defined if calculating diagonal occures regardless of type of shape
-        # so I went with relisation of it only in case of rectangle, that is why else case here
-        # is for last angle (gamma) -> self.rightAngle cannot be "none" in this function
         if(self.rightAngle == "a"):
             diagonal = self.aSide
         elif(self.rightAngle == "b"):
@@ -81,4 +85,4 @@ class Shape:
         else:
             diagonal = self.cSide
         return diagonal
-    
+   
