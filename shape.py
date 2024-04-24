@@ -49,7 +49,7 @@ class Shape:
             factor1 = (self.a[0] * (self.c[1] - self.a[1]) + (self.x[1] - self.a[1]) * (self.c[0] - self.a[0]) - (self.x[0] * (self.c[1] - self.a[1])))/((self.b[1] - self.a[1]) * (self.c[0] - self.a[0]) - ((self.b[0] - self.a[0]) * (self.c[1] - self.a[1])))
             factor2 = (self.x[1] - self.a[1] - (factor1 * (self.b[1] - self.a[1])))/(self.c[1] - self.a[1])
             factorSum = round(factor1 + factor2, 3)
-            if(factor1 >= 0 and factor2 >= 0 and factorSum <= 2):
+            if((factor1 >= 0 and factor1 <= 1) and (factor2 >= 0 and factor2 <= 1) and factorSum <= 2):
                 return True
             else:
                 return False
@@ -57,7 +57,7 @@ class Shape:
             factor1 = (self.b[0]*(self.c[0] - self.b[0]) + (self.x[1] - self.b[1]) * (self.c[0] - self.b[0]) - (self.x[0] * (self.c[0] - self.b[0])))/((self.a[1] - self.b[1]) * (self.c[0] - self.b[0]) - ((self.a[0] - self.b[0]) * (self.c[0] - self.b[0])))
             factor2 = (self.x[1] - self.b[1] - (factor1 * (self.a[1] - self.b[1])))/(self.c[1] - self.b[1])
             factorSum = round(factor1 + factor2, 3)
-            if(factor1 >= 0 and factor2 >= 0 and factorSum <= 2):
+            if((factor1 >= 0 and factor1 <= 1) and (factor2 >= 0 and factor2 <= 1) and factorSum <= 2):
                 return True
             else:
                 return False
@@ -65,7 +65,7 @@ class Shape:
             factor1 = (self.c[0] * (self.b[1] - self.c[1]) + (self.x[1] - self.c[1]) * (self.b[0] - self.c[0]) - (self.x[0] * (self.b[1] - self.c[1])))/((self.a[1] - self.c[1]) * (self.b[0] - self.c[0]) - ((self.a[0]- self.c[0]) * (self.b[1] - self.c[1])))
             factor2 = (self.x[1] - self.c[1] - (factor1 * (self.a[1] - self.c[1])))/(self.b[1] - self.c[1])
             factorSum = round(factor1 + factor2, 3)
-            if(factor1 >= 0 and factor2 >= 0 and factorSum <= 2):
+            if((factor1 >= 0 and factor1 <= 1) and (factor2 >= 0 and factor2 <= 1) and factorSum <= 2):
                 return True
             else:
                 return False
